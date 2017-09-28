@@ -14,14 +14,14 @@
     "url": "git@github.com:jas-/connect-redis-crypto.git"
   },
   "dependencies": {
-    "debug": "^3.0.1",
-    "redis": "^2.1.0"
+    "debug": "^3.1.0",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "blue-tape": "^1.0.0",
     "bluebird": "^3.5.0",
-    "eslint": "^4.6.0",
-    "express-session": "^1.15.5",
+    "eslint": "^4.7.2",
+    "express-session": "^1.15.6",
     "ioredis": "^3.1.4",
     "istanbul": "^0.4.5",
     "tape": "^4.8.0"
