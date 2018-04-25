@@ -1,45 +1,10 @@
-<<<<<<< HEAD
-var P = require('bluebird');
-=======
 /* eslint-env es6 */
->>>>>>> v3.3.4
 var test = require('blue-tape');
 var redisSrv = require('./redis-server');
 var session = require('express-session');
 var RedisStore = require('../')(session);
 var redis = require('redis');
 var ioRedis = require('ioredis');
-<<<<<<< HEAD
-
-// Takes a store through all the operations
-function lifecycleTest (store, t) {
-  P.promisifyAll(store);
-
-  return redisSrv.connect()
-    .then(function () {
-      return store.setAsync('123', { cookie: { maxAge: 2000 }, name: 'tj' });
-    })
-    .then(function (ok) {
-      t.equal(ok, 'OK', '#set() ok');
-      return store.getAsync('123');
-    })
-    .then(function (data) {
-      t.deepEqual({ cookie: { maxAge: 2000 }, name: 'tj' }, data, '#get() ok');
-    })
-    .then(function () {
-      return store.setAsync('123', { cookie: { maxAge: undefined }, name: 'tj' });
-    })
-    .then(function (ok) {
-      t.equal(ok, 'OK', '#set() no maxAge ok');
-      return store.destroyAsync('123');
-    })
-    .then(function (ok) {
-      t.equal(ok, 1, '#destroy() ok');
-      store.client.end();
-      return redisSrv.disconnect();
-    });
-}
-=======
 var sinon = require('sinon');
 var P = require('bluebird');
 
@@ -68,7 +33,6 @@ var lifecycleTest = P.coroutine(function *(store, t) {
 });
 
 test('setup', redisSrv.connect);
->>>>>>> v3.3.4
 
 test('defaults', function (t) {
   var store = new RedisStore();
@@ -77,40 +41,24 @@ test('defaults', function (t) {
   t.notOk(store.disableTTL, 'disableTTL not set');
   t.ok(store.client, 'creates client');
 
-<<<<<<< HEAD
-  store.client.end();
-=======
   store.client.end(false);
->>>>>>> v3.3.4
   t.end();
 });
 
 test('basic', function (t) {
   t.throws(RedisStore, TypeError, 'constructor not callable as function');
-<<<<<<< HEAD
-  var store = new RedisStore({ port: 8543, secret: 'squirel' });
-=======
   var store = new RedisStore({ port: redisSrv.port });
->>>>>>> v3.3.4
   return lifecycleTest(store, t);
 });
 
 test('existing client', function (t) {
-<<<<<<< HEAD
-  var client = redis.createClient(8543, 'localhost');
-=======
   var client = redis.createClient(redisSrv.port, 'localhost');
->>>>>>> v3.3.4
   var store = new RedisStore({ client: client });
   return lifecycleTest(store, t);
 });
 
 test('io redis client', function (t) {
-<<<<<<< HEAD
-  var client = ioRedis.createClient(8543, 'localhost');
-=======
   var client = ioRedis.createClient(redisSrv.port, 'localhost');
->>>>>>> v3.3.4
   var store = new RedisStore({ client: client });
   return lifecycleTest(store, t);
 });
@@ -118,46 +66,20 @@ test('io redis client', function (t) {
 test('options', function (t) {
   var store = new RedisStore({
     host: 'localhost',
-<<<<<<< HEAD
-    port: 8543,
-=======
     port: redisSrv.port,
->>>>>>> v3.3.4
     prefix: 'tobi',
     ttl: 1000,
     disableTTL: true,
     db: 1,
-<<<<<<< HEAD
-    unref: true,
-    pass: 'secret',
-    secret: 'squirel'
-=======
     scanCount: 32,
     unref: true,
     pass: 'secret'
->>>>>>> v3.3.4
   });
 
   t.equal(store.prefix, 'tobi', 'uses provided prefix');
   t.equal(store.ttl, 1000, 'ttl set');
   t.ok(store.disableTTL, 'disableTTL set');
   t.ok(store.client, 'creates client');
-<<<<<<< HEAD
-  t.equal(store.client.address, 'localhost:8543', 'sets host and port');
-  t.equal(store.secret, 'squirel', 'crypto secret');
-
-  var socketStore = new RedisStore({ socket: 'word' });
-  t.equal(socketStore.client.address, 'word', 'sets socket address');
-  socketStore.client.end();
-
-  var urlStore = new RedisStore({ url: 'redis://127.0.0.1:8888' });
-  t.equal(urlStore.client.address, '127.0.0.1:8888', 'sets url address');
-  urlStore.client.end();
-
-  var hostNoPort = new RedisStore({ host: 'host' });
-  t.equal(hostNoPort.client.address, 'host:6379', 'sets default port');
-  hostNoPort.client.end();
-=======
   t.equal(store.client.address, 'localhost:'+redisSrv.port, 'sets host and port');
   t.equal(store.scanCount, 32, 'sets scan count');
 
@@ -172,19 +94,10 @@ test('options', function (t) {
   var hostNoPort = new RedisStore({ host: 'host' });
   t.equal(hostNoPort.client.address, 'host:6379', 'sets default port');
   hostNoPort.client.end(false);
->>>>>>> v3.3.4
 
   return lifecycleTest(store, t);
 });
 
-<<<<<<< HEAD
-test('interups', function (t) {
-  var store = P.promisifyAll(new RedisStore({ port: 8543, connect_timeout: 500 }));
-  return store.setAsync('123', { cookie: { maxAge: 2000 }, name: 'tj' })
-    .catch(function (er) {
-      t.ok(/broken/.test(er.message), 'failed connection');
-      store.client.end();
-=======
 test('ttl options', P.coroutine(function *(t) {
   var store = new RedisStore({ port: redisSrv.port });
 
@@ -263,7 +176,6 @@ test('interups', function (t) {
     .catch(function (er) {
       t.ok(/broken/.test(er.message), 'failed connection');
       store.client.end(false);
->>>>>>> v3.3.4
     });
 });
 
@@ -278,14 +190,8 @@ test('serializer', function (t) {
   t.equal(serializer.stringify('UnitTest'), 'XXX"UnitTest"');
   t.equal(serializer.parse(serializer.stringify('UnitTest')), 'UnitTest');
 
-<<<<<<< HEAD
-  var store = new RedisStore({ port: 8543, serializer: serializer });
-  return lifecycleTest(store, t);
-});
-=======
   var store = new RedisStore({ port: redisSrv.port, serializer: serializer });
   return lifecycleTest(store, t);
 });
 
 test('teardown', redisSrv.disconnect);
->>>>>>> v3.3.4
