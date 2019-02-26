@@ -73,7 +73,8 @@ test('options', function (t) {
     db: 1,
     scanCount: 32,
     unref: true,
-    pass: 'secret'
+    pass: 'secret',
+    secret: 'squirrel'
   });
 
   t.equal(store.prefix, 'tobi', 'uses provided prefix');
@@ -82,6 +83,7 @@ test('options', function (t) {
   t.ok(store.client, 'creates client');
   t.equal(store.client.address, 'localhost:'+redisSrv.port, 'sets host and port');
   t.equal(store.scanCount, 32, 'sets scan count');
+  t.equal(store.secret, 'b361f29c39bd2a26368a6db012b081de', 'sets secret');
 
   var socketStore = new RedisStore({ socket: 'word' });
   t.equal(socketStore.client.address, 'word', 'sets socket address');
@@ -191,6 +193,11 @@ test('serializer', function (t) {
   t.equal(serializer.parse(serializer.stringify('UnitTest')), 'UnitTest');
 
   var store = new RedisStore({ port: redisSrv.port, serializer: serializer });
+  return lifecycleTest(store, t);
+});
+
+test('crypto enabled', function (t) {
+  var store = new RedisStore({ port: redisSrv.port, secret: 'squirrel' });
   return lifecycleTest(store, t);
 });
 

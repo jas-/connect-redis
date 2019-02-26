@@ -15,6 +15,11 @@ Pass the `express-session` store into `connect-redis` to create a `RedisStore` c
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 
+// To enable crypto you must define a secret for the `RedisStore`
+var options = {
+  secret: 'squirrel'
+};
+
 app.use(session({
     store: new RedisStore(options),
     secret: 'keyboard cat'
@@ -40,7 +45,7 @@ The following additional params may be included:
 	-	If a function, it is called anytime an error occurs (useful for custom logging)
 	-	If `false`, no logging occurs.
 -	`secret` Encryption secret (setting this will enable transparent encryption functionality)
--	`algorithm` Symmetric encryption algorithm (defaults to `aes-256-ctr`)
+-	`algorithm` Symmetric encryption algorithm (defaults to `aes-256-gcm`)
 -	`hashing` Hashing algorithm to use for HMAC of ciphertext (defaults to `sha512`)
 -	`encodeas` Default encoding of cipher text for storage (defaults to `hex`)
 
