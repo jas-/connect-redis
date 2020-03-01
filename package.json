@@ -1,7 +1,7 @@
 {
   "name": "connect-redis-crypto",
   "description": "Redis session store for Connect",
-  "version": "3.4.2",
+  "version": "4.0.4",
   "author": "TJ Holowaychuk <tj@vision-media.ca>",
   "contributors": [
     "Marc Harter <wavded@gmail.com>",
@@ -13,32 +13,30 @@
     "type": "git",
     "url": "git@github.com:jas-/connect-redis-crypto.git"
   },
-  "dependencies": {
-    "debug": "^4.1.1",
-    "redis": "^2.8.0",
-    "tape": "^4.10.1"
-  },
   "devDependencies": {
     "blue-tape": "^1.0.0",
-    "bluebird": "^3.5.3",
-    "eslint": "^5.14.1",
-    "express-session": "^1.15.6",
-    "ioredis": "^4.6.2",
-    "istanbul": "^0.4.5",
-    "sinon": "^7.2.4",
-    "tape": "^4.10.1"
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "express-session": "^1.17.0",
+    "ioredis": "^4.14.1",
+    "nyc": "^15.0.0",
+    "prettier": "^1.19.1",
+    "redis": "^2.8.0",
+    "redis-mock": "^0.48.0"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8.0.0"
   },
-  "engineStrict": true,
   "bugs": {
     "url": "https://github.com/jas-/connect-redis-crypto/issues"
   },
   "scripts": {
-    "test": "istanbul cover tape \"test/*-test.js\"",
-    "test-debug": "DEBUG=* istanbul cover tape \"test/*-test.js\"",
-    "bench": "node bench/redisbench.js",
-    "lint": "eslint index.js test lib bench"
+    "test": "nyc tape \"test/*-test.js\"",
+    "lint": "eslint index.js test lib",
+    "fmt": "prettier --write \"**/*.{js,md,json,*rc}\""
+  },
+  "dependencies": {
+    "kruptein": "^2.0.6"
   }
 }
