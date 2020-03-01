@@ -1,4 +1,4 @@
-[![npm](https://img.shields.io/npm/v/connect-redis-crypto.svg)](https://npmjs.com/package/connect-redis-crypto) [![travis](https://travis-ci.org/jas-/connect-redis-crypto.svg?branch=master)](https://travis-ci.org/jas-/connect-redis-crypto) [![code-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://gitter.im/jlongster/prettier) ![Downloads](https://img.shields.io/npm/dm/connect-redis.svg)
+[![npm](https://img.shields.io/npm/v/connect-redis-crypto.svg)](https://npmjs.com/package/connect-redis-crypto) [![travis](https://travis-ci.org/jas-/connect-redis-crypto.svg?branch=master)](https://travis-ci.org/jas-/connect-redis-crypto) [![code-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://gitter.im/jlongster/prettier) ![Downloads](https://img.shields.io/npm/dm/connect-redis-crypto.svg)
 
 **connect-redis-crypto** provides Redis session storage for Express. Requires Redis >= `2.0.0`.
 
