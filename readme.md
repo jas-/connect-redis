@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 [![npm](https://img.shields.io/npm/v/connect-redis-crypto.svg)](https://npmjs.com/package/connect-redis-crypto) [![travis](https://travis-ci.org/jas-/connect-redis-crypto.svg?branch=master)](https://travis-ci.org/jas-/connect-redis-crypto) [![code-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://gitter.im/jlongster/prettier) ![Downloads](https://img.shields.io/npm/dm/connect-redis.svg)
 
 **connect-redis-crypto** provides Redis session storage for Express. Requires Redis >= `2.0.0`.
-=======
-[![npm](https://img.shields.io/npm/v/connect-redis.svg)](https://npmjs.com/package/connect-redis) [![travis](https://travis-ci.org/tj/connect-redis.svg?branch=master)](https://travis-ci.org/tj/connect-redis) [![code-style](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://gitter.im/jlongster/prettier) ![Downloads](https://img.shields.io/npm/dm/connect-redis.svg)
-
-**connect-redis** provides Redis session storage for Express. Requires Redis >= `2.0.0`.
->>>>>>> master
 
 **Migrating to V4?** See [this guide](migration-to-v4.md) on what's changed.
 
@@ -15,21 +9,13 @@
 npm:
 
 ```sh
-<<<<<<< HEAD
 npm install redis connect-redis-crypto express-session
-=======
-npm install redis connect-redis express-session
->>>>>>> master
 ```
 
 Yarn:
 
 ```sh
-<<<<<<< HEAD
 yarn add redis connect-redis-crypto express-session
-=======
-yarn add redis connect-redis express-session
->>>>>>> master
 ```
 
 ## API
@@ -38,20 +24,12 @@ yarn add redis connect-redis express-session
 const redis = require('redis')
 const session = require('express-session')
 
-<<<<<<< HEAD
 let RedisStore = require('connect-redis-crypto')(session)
-=======
-let RedisStore = require('connect-redis')(session)
->>>>>>> master
 let redisClient = redis.createClient()
 
 app.use(
   session({
-<<<<<<< HEAD
     store: new RedisStore({ client: redisClient, secret: "squirrel" }),
-=======
-    store: new RedisStore({ client: redisClient }),
->>>>>>> master
     secret: 'keyboard cat',
     resave: false,
   })
