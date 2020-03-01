@@ -7,6 +7,13 @@
     "Marc Harter <wavded@gmail.com>",
     "Jason Gerfen <jason.gerfen@gmail.com>"
   ],
+  "keywords": [
+    "redis",
+    "sessions",
+    "cryptography",
+    "crypto",
+    "security"
+  ],
   "license": "MIT",
   "main": "./index.js",
   "repository": {
