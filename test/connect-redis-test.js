@@ -30,6 +30,7 @@ test('defaults', async t => {
   t.equal(store.serializer, JSON, 'defaults to JSON serialization')
   t.equal(store.disableTouch, false, 'defaults to having `touch` enabled')
   t.equal(store.secret, 'squirrel', 'store secret to enable encryption')
+
   client.end(false)
 })
 

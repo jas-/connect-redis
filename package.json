@@ -13,6 +13,9 @@
     "type": "git",
     "url": "git@github.com:jas-/connect-redis-crypto.git"
   },
+  "dependencies": {
+    "kruptein": "^v2.0.6"
+  },
   "devDependencies": {
     "blue-tape": "^1.0.0",
     "eslint": "^6.7.2",
@@ -35,8 +38,5 @@
     "test": "nyc tape \"test/*-test.js\"",
     "lint": "eslint index.js test lib",
     "fmt": "prettier --write \"**/*.{js,md,json,*rc}\""
-  },
-  "dependencies": {
-    "kruptein": "^2.0.6"
   }
 }
